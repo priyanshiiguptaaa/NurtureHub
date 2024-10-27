@@ -1,0 +1,23 @@
+@keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .animate-fade-in {
+    animation: fade-in 0.3s ease-in-out;
+  }
+  
+  .border {
+    border: 1px solid #e2e8f0;
+  }
+  
+  .bg-white {
+    background-color: white;
+  }
+  

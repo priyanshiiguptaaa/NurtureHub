@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --aashira-green: #4A6741;
+  --aashira-brown: #B76E54;
+  --aashira-bg: #F9F5F1;
+}
+
+body {
+  font-family: serif;
+  min-height: 100vh;
+  background-color: var(--aashira-bg);
+}

@@ -1,0 +1,125 @@
+.border {
+    border: 1px solid #e2e8f0; /* Light gray */
+}
+
+.rounded-lg {
+    border-radius: 0.5rem; /* Rounded corners */
+}
+
+.bg-white {
+    background-color: #ffffff; /* White background */
+}
+
+.shadow-md {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.my-4 {
+    margin: 1rem 0; /* Vertical margin */
+}
+
+.text-aashira-brown {
+    color: #6B4F4F; /* Example brown color */
+}
+
+.text-aashira-green {
+    color: #4CAF50; /* Example green color */
+}
+
+.transition {
+    transition: all 0.3s ease; /* Smooth transitions */
+}
+
+.hover\:text-aashira-green:hover {
+    color: #4CAF50; /* Change color on hover */
+}
+
+.hover\:scale-105:hover {
+    transform: scale(1.05); /* Scale up on hover */
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.5s; /* Fade-in animation */
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.w-16 {
+    width: 4rem; /* Set width for food item image */
+}
+
+.h-16 {
+    height: 4rem; /* Set height for food item image */
+}
+
+.rounded-full {
+    border-radius: 50%; /* Make images round */
+}
+
+.list-disc {
+    list-style-type: disc; /* Set bullet points for list */
+    margin-left: 1.5rem; /* Left margin for better alignment */
+}
+
+.cursor-pointer {
+    cursor: pointer; /* Change cursor to pointer for clickable items */
+}
+
+.mb-2 {
+    margin-bottom: 0.5rem; /* Space between list items */
+}
+
+.text-gray-500 {
+    color: #6B7280; /* Gray text color */
+}
+
+.text-gray-600 {
+    color: #4B5563; /* Darker gray text color */
+}
+
+.mt-2 {
+    margin-top: 0.5rem; /* Margin top for spacing */
+}
+
+.p-4 {
+    padding: 1rem; /* Padding for content */
+}
+
+.bg-gray-100 {
+    background-color: #f3f4f6; /* Light gray background */
+}
+
+.font-semibold {
+    font-weight: 600; /* Semi-bold text */
+}
+
+.flex {
+    display: flex; /* Flexbox layout */
+}
+
+.items-center {
+    align-items: center; /* Center items vertically */
+}
+
+.mr-2 {
+    margin-right: 0.5rem; /* Margin right for spacing */
+}
+
+.ml-2 {
+    margin-left: 0.5rem; /* Margin left for spacing */
+}
+
+.mb-4 {
+    margin-bottom: 1rem; /* Bottom margin */
+}
+
+.mt-4 {
+    margin-top: 1rem; /* Top margin */
+}

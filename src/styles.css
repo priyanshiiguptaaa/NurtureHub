@@ -1,0 +1,28 @@
+body {
+    font-family: serif;
+    background-color: #F9F5F1;
+    min-height: 100vh;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+  
+  .text-aashira-green {
+    color: #4A6741;
+  }
+  
+  .text-aashira-brown {
+    color: #B76E54;
+  }
+  
+  .bg-aashira-green {
+    background-color: #4A6741;
+  }
+  
+  .rounded-full {
+    border-radius: 9999px;
+  }
+  
