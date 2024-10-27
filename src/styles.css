@@ -1,28 +1,189 @@
+/* Reset and base styles */
+:root {
+  --primary-brown: #8B4513;
+  --primary-green: #4A6741;
+  --hover-green: #5B573E;
+  --background-cream: #F9F5F1;
+  --white: #ffffff;
+  --shadow-color: rgba(139, 69, 19, 0.1);
+}
+
 body {
-    font-family: serif;
-    background-color: #F9F5F1;
-    min-height: 100vh;
-  }
-  
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
+  font-family: 'Crimson Text', serif;
+  background-color: var(--background-cream);
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Header styling */
+header {
+  height: 80px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: var(--white);
+  box-shadow: 0 4px 20px var(--shadow-color);
+  z-index: 1000;
+  backdrop-filter: blur(8px);
+  width: 100%;
+}
+
+/* Navbar styling */
+.navbar {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  padding: 0 2rem;
+}
+
+/* Navigation links */
+.navbar ul {
+  display: flex;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  gap: 2.5rem;
+}
+
+.navbar li a {
+  text-decoration: none;
+  color: var(--primary-brown);
+  font-size: 1.1rem;
+  font-weight: 500;
+  position: relative;
+  padding: 0.5rem 0;
+  transition: color 0.3s ease;
+}
+
+.navbar li a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--primary-green);
+  transition: width 0.3s ease;
+}
+
+.navbar li a:hover,
+.navbar li a:focus {
+  color: var(--primary-green);
+}
+
+.navbar li a:hover::after,
+.navbar li a:focus::after {
+  width: 100%;
+}
+
+/* Auth buttons styling */
+.auth-buttons {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.auth-buttons button {
+  padding: 0.7rem 1.5rem;
+  border: none;
+  border-radius: 25px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Button hover and focus styles for accessibility */
+.auth-buttons button:focus {
+  outline: 2px dashed var(--primary-green);
+  outline-offset: 4px;
+}
+
+.login {
+  background-color: transparent;
+  color: var(--primary-green);
+  border: 2px solid var(--primary-green);
+}
+
+.login:hover,
+.login:focus {
+  background-color: var(--primary-green);
+  color: var(--white);
+}
+
+.signup {
+  background-color: var(--primary-green);
+  color: var(--white);
+}
+
+.signup:hover,
+.signup:focus {
+  background-color: var(--hover-green);
+  transform: translateY(-2px);
+}
+
+/* Language selector */
+.language-selector button {
+  background-color: var(--primary-brown);
+  color: var(--white);
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 20px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-left: 1rem;
+}
+
+.language-selector button:hover,
+.language-selector button:focus {
+  background-color: var(--hover-green);
+}
+
+/* Main content spacing */
+.content {
+  margin-top: 80px; /* Space for the fixed header */
+  min-height: calc(100vh - 80px); /* Full viewport height minus the header height */
+  width: 100%;
+  padding-top: 1rem; /* Optional padding for better spacing */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .navbar {
     padding: 0 1rem;
   }
-  
-  .text-aashira-green {
-    color: #4A6741;
+
+  .navbar ul {
+    gap: 1.5rem;
   }
-  
-  .text-aashira-brown {
-    color: #B76E54;
+
+  .auth-buttons button {
+    padding: 0.5rem 1rem;
   }
-  
-  .bg-aashira-green {
-    background-color: #4A6741;
+
+  .language-selector button {
+    padding: 0.4rem 0.8rem;
   }
-  
-  .rounded-full {
-    border-radius: 9999px;
+}
+
+/* Animation utilities */
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
   }
-  
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

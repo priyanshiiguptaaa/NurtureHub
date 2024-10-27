@@ -1,13 +1,11 @@
-/* eslint-disable no-unused-vars */
-// src/NameFinder.jsx
-import React, { useState } from 'react';
-import { FaSearch, FaTimes } from 'react-icons/fa';
-import './NameFinder.css'; // Import custom styles
-
+import React, { useState, useMemo } from 'react';
+import { Search, X, Filter, Globe2, TrendingUp } from 'lucide-react';
+import "./NameFinder.css"
 const NameFinder = () => {
   const [searchTerm, setSearchTerm] = useState('');
-  const [suggestions, setSuggestions] = useState([]);
   const [selectedName, setSelectedName] = useState(null);
+  const [originFilter, setOriginFilter] = useState('all');
+  const [sortBy, setSortBy] = useState('alphabetical');
 
   const nameData = [
     { name: 'Aaryan', meaning: 'Jawan', origin: 'Sanskrit', popularity: 3 },
@@ -36,78 +34,145 @@ const NameFinder = () => {
     { name: 'Zain', meaning: 'Beauty', origin: 'Arabic', popularity: 25 }
   ];
 
-  const handleSearch = (e) => {
-    const term = e.target.value;
-    setSearchTerm(term);
+  const origins = useMemo(() => 
+    ['all', ...new Set(nameData.map(name => name.origin))],
+    []
+  );
 
-    if (term) {
-      const filteredNames = nameData.filter(({ name }) =>
-        name.toLowerCase().startsWith(term.toLowerCase())
-      );
-      setSuggestions(filteredNames);
-    } else {
-      setSuggestions([]);
-      setSelectedName(null); // Clear selected name
-    }
-  };
+  const filteredAndSortedNames = useMemo(() => {
+    let filtered = nameData.filter(({ name, origin }) => {
+      const matchesSearch = name.toLowerCase().includes(searchTerm.toLowerCase());
+      const matchesOrigin = originFilter === 'all' || origin === originFilter;
+      return matchesSearch && matchesOrigin;
+    });
+
+    return filtered.sort((a, b) => {
+      if (sortBy === 'popularity') {
+        return a.popularity - b.popularity;
+      } else if (sortBy === 'alphabetical') {
+        return a.name.localeCompare(b.name);
+      }
+      return 0;
+    });
+  }, [searchTerm, originFilter, sortBy]);
 
   const handleSelectName = (name) => {
-    setSearchTerm(name.name);
     setSelectedName(name);
-    setSuggestions([]);
   };
 
   const clearSearch = () => {
     setSearchTerm('');
-    setSuggestions([]);
-    setSelectedName(null); // Clear selected name
+    setSelectedName(null);
   };
 
   return (
-    <div className="border rounded-lg p-4 bg-white shadow-md my-4">
-      <h2 className="text-2xl text-aashira-brown font-bold mb-4">Name Finder</h2>
-      <div className="flex items-center mb-2">
-        <FaSearch className="text-gray-500 mr-2" />
-        <input
-          type="text"
-          placeholder="Search for a name..."
-          value={searchTerm}
-          onChange={handleSearch}
-          className="border rounded-lg p-2 flex-grow"
-        />
-        {searchTerm && (
-          <button onClick={clearSearch} className="ml-2 text-red-500">
-            <FaTimes />
-          </button>
+    <div className="w-full max-w-3xl mx-auto bg-white rounded-lg shadow-lg p-6">
+      {/* Header */}
+      <div className="text-center mb-8">
+        <h1 className="text-3xl font-bold text-indigo-600">Name Explorer</h1>
+      </div>
+
+      {/* Search and Filters Section */}
+      <div className="space-y-4">
+        {/* Search Bar */}
+        <div className="relative">
+          <Search className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+          <input
+            type="text"
+            placeholder="Search for a name..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="w-full pl-10 pr-10 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none"
+          />
+          {searchTerm && (
+            <button
+              onClick={clearSearch}
+              className="absolute right-3 top-3 text-gray-400 hover:text-gray-600"
+            >
+              <X className="h-4 w-4" />
+            </button>
+          )}
+        </div>
+
+        {/* Filters */}
+        <div className="flex gap-4">
+          <select
+            value={originFilter}
+            onChange={(e) => setOriginFilter(e.target.value)}
+            className="flex-1 px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none"
+          >
+            {origins.map(origin => (
+              <option key={origin} value={origin}>
+                {origin.charAt(0).toUpperCase() + origin.slice(1)}
+              </option>
+            ))}
+          </select>
+          <select
+            value={sortBy}
+            onChange={(e) => setSortBy(e.target.value)}
+            className="flex-1 px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none"
+          >
+            <option value="alphabetical">Alphabetical</option>
+            <option value="popularity">Popularity</option>
+          </select>
+        </div>
+      </div>
+
+      {/* Results Section */}
+      <div className="mt-6">
+        {filteredAndSortedNames.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {filteredAndSortedNames.map((nameInfo) => (
+              <div
+                key={nameInfo.name}
+                onClick={() => handleSelectName(nameInfo)}
+                className={`p-4 rounded-lg cursor-pointer transition-all duration-200 hover:shadow-md ${
+                  selectedName?.name === nameInfo.name
+                    ? 'bg-indigo-50 border-2 border-indigo-500'
+                    : 'bg-gray-50 border border-gray-200'
+                }`}
+              >
+                <div className="flex justify-between items-start">
+                  <div>
+                    <h3 className="text-lg font-semibold text-indigo-600">
+                      {nameInfo.name}
+                    </h3>
+                    <p className="text-gray-600">{nameInfo.meaning}</p>
+                  </div>
+                  <div className="flex items-center">
+                    <Globe2 className="h-4 w-4 text-gray-400 mr-1" />
+                    <span className="text-sm text-gray-500">{nameInfo.origin}</span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="text-center py-8">
+            <p className="text-gray-500">No names found matching your criteria</p>
+          </div>
         )}
       </div>
-      {suggestions.length > 0 && (
-        <ul className="list-disc pl-5">
-          {suggestions.map((nameData, index) => (
-            <li
-              key={index}
-              onClick={() => handleSelectName(nameData)}
-              className="cursor-pointer hover:text-aashira-green mb-2 transition duration-200 transform hover:scale-105 animate-fade-in"
-            >
-              <span className="font-semibold">{nameData.name}</span>: <span className="text-gray-600">{nameData.meaning}</span>
-            </li>
-          ))}
-        </ul>
-      )}
-      {searchTerm && !suggestions.length && (
-        <p className="text-gray-600 mt-2">No suggestions found for &quot;{searchTerm}&quot;</p>
-      )}
-      {suggestions.length > 0 && (
-        <p className="text-gray-500 mt-2">{suggestions.length} suggestion(s) found</p>
-      )}
-      
-      {/* Display detailed view of the selected name */}
+
+      {/* Selected Name Details */}
       {selectedName && (
-        <div className="mt-4 p-4 border rounded bg-gray-100">
-          <h3 className="text-xl font-semibold">{selectedName.name}</h3>
-          <p><strong>Meaning:</strong> {selectedName.meaning}</p>
-          <p><strong>Origin:</strong> {selectedName.origin}</p>
-          <p><strong>Popularity Rank:</strong> {selectedName.popularity}</p>
+        <div className="mt-6 p-6 bg-white rounded-lg border-2 border-indigo-100 shadow-lg">
+          <div className="flex justify-between items-start">
+            <div>
+              <h2 className="text-2xl font-bold text-indigo-600">{selectedName.name}</h2>
+              <p className="text-lg text-gray-700 mt-2">{selectedName.meaning}</p>
+            </div>
+            <div className="flex items-center space-x-4">
+              <div className="flex items-center">
+                <Globe2 className="h-5 w-5 text-gray-400 mr-2" />
+                <span className="text-gray-600">{selectedName.origin}</span>
+              </div>
+              <div className="flex items-center">
+                <TrendingUp className="h-5 w-5 text-gray-400 mr-2" />
+                <span className="text-gray-600">Rank #{selectedName.popularity}</span>
+              </div>
+            </div>
+          </div>
         </div>
       )}
     </div>

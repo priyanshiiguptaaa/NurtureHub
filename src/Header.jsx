@@ -1,29 +1,39 @@
-/* eslint-disable no-unused-vars */
-// src/Header.jsx
 import React from "react";
-import { Link } from "react-router-dom"; // Import Link from react-router-dom
+import { Link } from "react-router-dom";
 
-const Header = () => (
-  <header className="container mx-auto px-4 py-4 flex justify-between items-center">
-    <div className="flex items-center space-x-4">
-      <button className="text-2xl focus:outline-none">☰</button> {/* Added focus outline for accessibility */}
-      <img src="/placeholder.svg" alt="Aashira Logo" className="h-10 w-auto" />
-    </div>
-    <nav className="hidden md:flex space-x-6 text-aashira-green">
-      <Link to="#community" className="hover:text-aashira-dark">Community</Link>
-      <Link to="#pregnancy" className="hover:text-aashira-dark">Pregnancy</Link>
-      <Link to="/" className="hover:text-aashira-dark">Baby</Link> {/* Linking to the main page */}
-      {/* <Link to="#products" className="hover:text-aashira-dark">Products</Link> */}
-    </nav>
-    <div className="flex items-center space-x-4">
-      <button className="text-aashira-green hover:underline focus:outline-none">Login</button>
-      <button className="bg-aashira-green text-white px-4 py-2 rounded hover:bg-aashira-dark transition-colors duration-200">Sign up</button>
-      <select className="bg-transparent border-none text-aashira-green focus:outline-none">
-        <option>EN</option>
-        {/* You can add more language options here */}
-      </select>
-    </div>
-  </header>
-);
+const Header = () => {
+  return (
+    <header className="header-container animate-fade-in">
+      <nav className="navbar">
+        <ul className="navbar-links">
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/community">Community</Link>
+          </li>
+          <li>
+            <Link to="/pregnancy">Pregnancy</Link>
+          </li>
+          <li>
+            <Link to="/baby">Baby</Link>
+          </li>
+        </ul>
+
+        <div className="auth-buttons">
+          <Link to="/login">
+            <button className="login" aria-label="Login">Login</button>
+          </Link>
+          <Link to="/signup">
+            <button className="signup" aria-label="Sign Up">Sign Up</button>
+          </Link>
+          <div className="language-selector">
+            <button aria-label="Select Language">EN</button>
+          </div>
+        </div>
+      </nav>
+    </header>
+  );
+};
 
 export default Header;

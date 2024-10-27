@@ -1,0 +1,64 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f8ff; /* Soft light blue background */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full viewport height */
+}
+
+.calculator-container {
+    background-color: #ffffff; /* White background for the calculator */
+    border-radius: 8px;
+    padding: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    max-width: 400px; /* Maximum width */
+    width: 100%; /* Responsive */
+    text-align: center; /* Centered text */
+}
+
+h2 {
+    color: #333; /* Dark text for headings */
+    margin-bottom: 20px; /* Space below heading */
+}
+
+label {
+    display: block; /* Labels are block elements */
+    margin: 15px 0 5px; /* Space around labels */
+    color: #555; /* Medium gray color */
+    font-size: 14px; /* Font size for labels */
+}
+
+input[type="date"],
+input[type="number"] {
+    width: 100%; /* Full width input */
+    padding: 8px; /* Padding inside inputs */
+    margin-top: 5px; /* Space above inputs */
+    border: 1px solid #ddd; /* Light gray border */
+    border-radius: 4px; /* Rounded corners */
+    font-size: 16px; /* Font size for inputs */
+    box-sizing: border-box; /* Include padding and border in total width */
+}
+
+button {
+    background-color: #A46B4D; /* Button background color */
+    color: #fff; /* White text */
+    border: none; /* No border */
+    padding: 10px 20px; /* Padding inside button */
+    border-radius: 4px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor */
+    font-size: 16px; /* Font size for button */
+    margin-top: 15px; /* Space above button */
+}
+
+button:hover {
+    background-color: #5B573E; /* Darker button color on hover */
+}
+
+.result {
+    margin-top: 20px; /* Space above result text */
+    font-size: 18px; /* Font size for result */
+    color: #5B573E; /* Dark green color for results */
+}
