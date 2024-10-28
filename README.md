@@ -44,9 +44,9 @@ npm run build
 ```
 
 ## 🛠️ Technologies Used
-- **Frontend**: React.js, CSS, HTML
-- **Backend**: Node.js, Express
-- **Database**: MongoDB
+- **Frontend**: React.js Vite, CSS, HTML
+- **Backend**: Django
+- **Database**: MySQL
 - **AI Integration**: Machine Learning models for content recommendation
 - **Others**: Multilingual support libraries, RESTful API
 
