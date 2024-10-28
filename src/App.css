@@ -1,6 +1,4 @@
-/* app.css */
-/* Reset default styles */
-* {
+/* * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -13,29 +11,25 @@
   text-align: center;
 }
 
-/* App container */
 .app-container {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
 }
 
-/* Content wrapper to handle spacing below fixed header */
 .content-wrapper {
-  padding-top: 80px; /* Height of the header */
+  padding-top: 80px;
   flex: 1;
   width: 100%;
   max-width: 1400px;
   margin: 0 auto;
 }
 
-/* Main content area */
 .main-content {
   padding: 2rem;
   width: 100%;
 }
 
-/* Utility classes */
 .container {
   width: 100%;
   max-width: 1400px;
@@ -43,14 +37,12 @@
   padding: 0 1rem;
 }
 
-/* Responsive adjustments */
 @media (max-width: 768px) {
   .main-content {
     padding: 1rem;
   }
 }
 
-/* Keep any existing animations or specific styles you need */
 .logo {
   height: 6em;
   padding: 1.5em;
@@ -87,4 +79,4 @@
 
 .read-the-docs {
   color: #888;
-}
+} */

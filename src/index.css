@@ -2,14 +2,32 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --aashira-green: #4A6741;
-  --aashira-brown: #B76E54;
-  --aashira-bg: #F9F5F1;
+@layer base {
+  :root {
+    --aashira-green: #4A6741;
+    --aashira-brown: #B76E54;
+    --aashira-bg: #F9F5F1;
+  }
+
+  html {
+    @apply h-full;
+  }
+
+  body {
+    @apply h-full m-0 p-0 font-serif bg-[#F9F5F1];
+  }
+
+  #root {
+    @apply h-full;
+  }
 }
 
-body {
-  font-family: serif;
-  min-height: 100vh;
-  background-color: var(--aashira-bg);
+@layer components {
+  .page-container {
+    @apply min-h-screen pt-20 flex flex-col;
+  }
+
+  .main-content {
+    @apply flex-grow;
+  }
 }

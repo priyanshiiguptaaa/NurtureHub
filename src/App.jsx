@@ -11,33 +11,34 @@ import GrowthTracker from './GrowthTracker';
 import NameFinder from './NameFinder';
 import BabyFeeder from './BabyFeederTool';
 import PregnatalCheckupTracker from './PregnatalCheckupTracker';
+import RoutineCheckups from './RoutineCheckup';
 import Footer from './Footer';
-import Login from './components/auth/Login';  // We'll create this
-import Register from './components/auth/Register';  // We'll create this
-import './styles.css';
+import NutritionalCounseling from './NutritionalCounseling';
+import Login from './components/auth/Login';
+import Register from './components/auth/Register';
 
 const App = () => (
   <Router>
-    <div className="app-container bg-[#F9F5F1] min-h-screen font-serif">
+    <div className="page-container">
       <Header />
-      <div className="content-wrapper">
-        <main className="main-content">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/baby" element={<Baby />} />
-            <Route path="/pregnancy" element={<Pregnancy />} />
-            <Route path="/community" element={<Community />} />
-            <Route path="/ovulation-calculator" element={<OvulationCalculator />} />
-            <Route path="/vaccine-scheduler" element={<VaccineScheduler />} />
-            <Route path="/growth-tracker" element={<GrowthTracker />} />
-            <Route path="/name-finder" element={<NameFinder />} />
-            <Route path="/baby-feeder" element={<BabyFeeder />} />
-            <Route path="/pregnancy-checkup" element={<PregnatalCheckupTracker />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Register />} />
-          </Routes>
-        </main>
-      </div>
+      <main className="main-content container mx-auto px-4">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/baby" element={<Baby />} />
+          <Route path="/pregnancy" element={<Pregnancy />} />
+          <Route path="/community" element={<Community />} />
+          <Route path="/ovulation-calculator" element={<OvulationCalculator />} />
+          <Route path="/vaccine-scheduler" element={<VaccineScheduler />} />
+          <Route path="/growth-tracker" element={<GrowthTracker />} />
+          <Route path="/name-finder" element={<NameFinder />} />
+          <Route path="/baby-feeder" element={<BabyFeeder />} />
+          <Route path="/pregnancy-checkup" element={<PregnatalCheckupTracker />} />
+          <Route path="/routine-checkups" element={<RoutineCheckups />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Register />} />
+          <Route path="/nutrition" element={<NutritionalCounseling />} />
+        </Routes>
+      </main>
       <Footer />
     </div>
   </Router>
