@@ -1,0 +1,31 @@
+/* pregnancy-page.css */
+
+/* Home Page */
+.pregnancy-page {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Background Image */
+  .pregnancy-page .background-image {
+    position: absolute;
+    margin-top: 100px;
+    width: 110%;
+    height: 100%;
+    background-image: linear-gradient(rgba(235, 237, 228, 0.7), rgba(235, 237, 228, 0.7)), url('path/to/your/image.jpg');
+    background-size: cover;
+    background-position: center;
+    z-index: -1;
+  }
+  
+  /* Intro */
+  .pregnancy-page .intro {
+    padding: auto;
+    position: relative;
+    z-index: 1;
+    text-align: center;
+  }
+  

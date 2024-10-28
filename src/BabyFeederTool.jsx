@@ -1,44 +1,86 @@
-import React, { useState } from 'react';
-import { FaSearch, FaTimes } from 'react-icons/fa';
-import './BabyFeederTool.css';
+import React, { useState, useMemo } from 'react';
+import { Search, X, Baby, Apple, Clock, Award, Leaf, AlertCircle, ChevronRight } from 'lucide-react';
 
 const BabyFeederTool = () => {
   const [searchTerm, setSearchTerm] = useState('');
-  const [suggestions, setSuggestions] = useState([]);
   const [selectedFood, setSelectedFood] = useState(null);
-  const [modalContent, setModalContent] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalContent, setModalContent] = useState('');
+  const [ageFilter, setAgeFilter] = useState('all');
+  const [textureFilter, setTextureFilter] = useState('all');
 
   const foodData = [
-    { food: 'Applesauce', age: '6+ months', nutrition: 'Vitamins A, C', texture: 'Smooth', image: '/images/applesauce.jpg' },
-    { food: 'Banana', age: '6+ months', nutrition: 'Potassium, Fiber', texture: 'Soft', image: '/images/banana.jpg' },
-    // Add more food items here
+    { 
+      food: 'Applesauce', 
+      age: '6+ months', 
+      nutrition: 'Vitamins A, C', 
+      texture: 'Smooth',
+      benefits: 'Easy to digest, good for developing taste',
+      preparation: 'Steam and puree fresh apples, or use unsweetened store-bought version',
+      tips: 'Start with small portions to test tolerance',
+      allergyInfo: 'Generally low allergenic risk'
+    },
+    { 
+      food: 'Banana', 
+      age: '6+ months', 
+      nutrition: 'Potassium, Fiber, Vitamin B6', 
+      texture: 'Soft',
+      benefits: 'Natural sweetness, easy to mash',
+      preparation: 'Mash ripe banana with fork, no cooking needed',
+      tips: 'Choose ripe bananas with brown spots',
+      allergyInfo: 'Rarely allergenic'
+    },
+    { 
+      food: 'Sweet Potato', 
+      age: '6+ months', 
+      nutrition: 'Beta Carotene, Vitamin C', 
+      texture: 'Smooth',
+      benefits: 'Rich in nutrients, naturally sweet',
+      preparation: 'Bake or steam until soft, puree until smooth',
+      tips: 'Can be mixed with breast milk for familiar taste',
+      allergyInfo: 'Low allergy risk'
+    },
+    { 
+      food: 'Avocado', 
+      age: '6+ months', 
+      nutrition: 'Healthy Fats, Vitamin E', 
+      texture: 'Creamy',
+      benefits: 'Healthy brain development',
+      preparation: 'Mash ripe avocado, serve immediately',
+      tips: 'Use ripe but not brown avocados',
+      allergyInfo: 'Generally safe, watch for latex allergy'
+    },
+    { 
+      food: 'Rice Cereal', 
+      age: '4+ months', 
+      nutrition: 'Iron, B Vitamins', 
+      texture: 'Smooth',
+      benefits: 'Fortified with iron, easy to digest',
+      preparation: 'Mix with breast milk or formula',
+      tips: 'Start with thin consistency',
+      allergyInfo: 'Generally well tolerated'
+    }
   ];
 
-  const handleSearch = (e) => {
-    const term = e.target.value;
-    setSearchTerm(term);
+  const ages = useMemo(() => ['all', ...new Set(foodData.map(food => food.age))], [foodData]);
+  const textures = useMemo(() => ['all', ...new Set(foodData.map(food => food.texture))], [foodData]);
 
-    if (term) {
-      const filteredFoods = foodData.filter(({ food }) =>
-        food.toLowerCase().includes(term.toLowerCase())
-      );
-      setSuggestions(filteredFoods);
-    } else {
-      setSuggestions([]);
-      setSelectedFood(null);
-    }
-  };
+  const filteredFoods = useMemo(() => {
+    return foodData.filter(food => {
+      const matchesSearch = food.food.toLowerCase().includes(searchTerm.toLowerCase());
+      const matchesAge = ageFilter === 'all' || food.age === ageFilter;
+      const matchesTexture = textureFilter === 'all' || food.texture === textureFilter;
+      return matchesSearch && matchesAge && matchesTexture;
+    });
+  }, [searchTerm, ageFilter, textureFilter, foodData]);
 
   const handleSelectFood = (food) => {
-    setSearchTerm(food.food);
     setSelectedFood(food);
-    setSuggestions([]);
+    setSearchTerm(food.food);
   };
 
   const clearSearch = () => {
     setSearchTerm('');
-    setSuggestions([]);
     setSelectedFood(null);
   };
 
@@ -47,105 +89,126 @@ const BabyFeederTool = () => {
     setIsModalOpen(true);
   };
 
-  const closeModal = () => {
-    setIsModalOpen(false);
-    setModalContent('');
-  };
+  const feedingTypes = [
+    {
+      title: 'Breastfeeding',
+      icon: <Baby className="w-5 h-5" />,
+      content: 'Breastfeeding provides essential nutrients and antibodies for the first six months, helping strengthen immunity and foster bonding. Benefits include:\n- Perfect nutrition\n- Enhanced immunity\n- Better digestion\n- Emotional bonding'
+    },
+    {
+      title: 'Formula Feeding',
+      icon: <Apple className="w-5 h-5" />,
+      content: 'Formula Feeding is a complete nutrition alternative to breastfeeding. Key points:\n- Scientifically designed nutrition\n- Consistent ingredients\n- Easier to measure intake\n- Flexible feeding schedule'
+    },
+    {
+      title: 'Combination Feeding',
+      icon: <Clock className="w-5 h-5" />,
+      content: 'Combination Feeding offers flexibility by mixing breast milk and formula. Benefits:\n- Best of both methods\n- Increased flexibility\n- Shared feeding responsibility\n- Maintained milk supply'
+    },
+    {
+      title: 'Responsive Feeding',
+      icon: <Award className="w-5 h-5" />,
+      content: 'Responsive Feeding focuses on baby\'s cues for hunger and fullness. Guidelines:\n- Watch for hunger signs\n- Respect fullness signals\n- No forced feeding\n- Regular feeding schedule'
+    },
+  ];
 
   return (
-    <div className="border rounded-lg p-4 bg-white shadow-md my-4">
-      <h2 className="text-2xl text-aashira-brown font-bold mb-4">Baby Feeder Tool</h2>
-      <div className="flex items-center mb-2">
-        <FaSearch className="text-gray-500 mr-2" />
-        <input
-          type="text"
-          placeholder="Search for baby food..."
-          value={searchTerm}
-          onChange={handleSearch}
-          className="border rounded-lg p-2 flex-grow"
-        />
-        {searchTerm && (
-          <button onClick={clearSearch} className="ml-2 text-red-500">
-            <FaTimes />
-          </button>
+    <div className="w-full max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-6">
+      {/* Header */}
+      <div className="text-center mb-8">
+        <h1 className="text-3xl font-bold text-purple-600">Baby Feeding Guide</h1>
+        <p className="text-gray-600 mt-2">Find the perfect food for your little one</p>
+      </div>
+
+      {/* Search and Filters */}
+      <div className="space-y-4">
+        <div className="relative">
+          <Search className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+          <input
+            type="text"
+            placeholder="Search for baby food..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="w-full pl-10 pr-10 py-2 border rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none"
+          />
+          {searchTerm && (
+            <button onClick={clearSearch} className="absolute right-3 top-3 text-gray-400 hover:text-gray-600">
+              <X className="h-4 w-4" />
+            </button>
+          )}
+        </div>
+
+        <div className="flex gap-4">
+          <select
+            value={ageFilter}
+            onChange={(e) => setAgeFilter(e.target.value)}
+            className="flex-1 px-4 py-2 border rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none"
+          >
+            <option value="all">All Ages</option>
+            {ages.filter(age => age !== 'all').map(age => (
+              <option key={age} value={age}>{age}</option>
+            ))}
+          </select>
+          <select
+            value={textureFilter}
+            onChange={(e) => setTextureFilter(e.target.value)}
+            className="flex-1 px-4 py-2 border rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none"
+          >
+            <option value="all">All Textures</option>
+            {textures.filter(texture => texture !== 'all').map(texture => (
+              <option key={texture} value={texture}>{texture}</option>
+            ))}
+          </select>
+        </div>
+      </div>
+
+      {/* Food List */}
+      <div className="mt-6">
+        {filteredFoods.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {filteredFoods.map((food) => (
+              <div
+                key={food.food}
+                onClick={() => handleSelectFood(food)}
+                className={`p-4 rounded-lg cursor-pointer transition-all duration-200 hover:shadow-md ${
+                  selectedFood?.food === food.food
+                    ? 'bg-purple-50 border-2 border-purple-500'
+                    : 'bg-gray-50 border border-gray-200'
+                }`}
+              >
+                <div className="flex justify-between items-start">
+                  <div>
+                    <h3 className="text-lg font-semibold text-purple-600">{food.food}</h3>
+                    <p className="text-gray-600">{food.nutrition}</p>
+                    <div className="flex items-center mt-2 text-sm text-gray-500">
+                      <Clock className="w-4 h-4 mr-1" />
+                      <span>{food.age}</span>
+                      <Leaf className="w-4 h-4 ml-3 mr-1" />
+                      <span>{food.texture}</span>
+                    </div>
+                  </div>
+                  <ChevronRight className="w-5 h-5 text-gray-400" />
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="text-center text-gray-500">No food items found.</div>
         )}
       </div>
-      {suggestions.length > 0 && (
-        <ul className="list-disc pl-5">
-          {suggestions.map((foodItem, index) => (
-            <li
-              key={index}
-              onClick={() => handleSelectFood(foodItem)}
-              className="cursor-pointer hover:text-aashira-green mb-2 transition duration-200 transform hover:scale-105"
-            >
-              <div className="flex items-center mb-2">
-                <img src={foodItem.image} alt={foodItem.food} className="w-16 h-16 rounded-full mr-2" />
-                <span className="font-semibold">{foodItem.food}</span>
-              </div>
-            </li>
-          ))}
-        </ul>
-      )}
-      {searchTerm && !suggestions.length && (
-        <p className="text-gray-600 mt-2">No suggestions found for &quot;{searchTerm}&quot;</p>
-      )}
-      {suggestions.length > 0 && (
-        <p className="text-gray-500 mt-2">{suggestions.length} suggestion(s) found</p>
-      )}
 
-      {/* Detailed view of the selected food */}
-      {selectedFood && (
-        <div className="mt-4 p-4 border rounded bg-gray-100">
-          <h3 className="text-xl font-semibold">{selectedFood.food}</h3>
-          <p><strong>Recommended Age:</strong> {selectedFood.age}</p>
-          <p><strong>Nutrition:</strong> {selectedFood.nutrition}</p>
-          <p><strong>Texture:</strong> {selectedFood.texture}</p>
-        </div>
-      )}
-
-      {/* Feeding Information Section with Buttons */}
-      <div className="mt-6">
-        <h3 className="text-xl font-semibold mb-4">Feeding Information</h3>
-        <div className="flex space-x-2">
-          <button
-            onClick={() => openModal('Breastfeeding: Provides essential nutrients and antibodies for the first six months, helping strengthen immunity and foster bonding.')}
-            className="px-4 py-2 bg-aashira-green text-white rounded hover:scale-105 transition"
-          >
-            Breastfeeding
-          </button>
-          <button
-            onClick={() => openModal('Formula Feeding: An alternative to breastfeeding, offering complete nutrition. Choose a formula based on your baby’s specific dietary needs.')}
-            className="px-4 py-2 bg-aashira-green text-white rounded hover:scale-105 transition"
-          >
-            Formula Feeding
-          </button>
-          <button
-            onClick={() => openModal('Combination Feeding: A flexible mix of breast milk and formula, suited for parents who need to balance breastfeeding with other feeding methods.')}
-            className="px-4 py-2 bg-aashira-green text-white rounded hover:scale-105 transition"
-          >
-            Combination Feeding
-          </button>
-          <button
-            onClick={() => openModal('Responsive Feeding: Focuses on the baby’s hunger and fullness cues, helping them develop healthy eating habits early.')}
-            className="px-4 py-2 bg-aashira-green text-white rounded hover:scale-105 transition"
-          >
-            Responsive Feeding
-          </button>
-        </div>
-      </div>
-
-      {/* Modal for displaying feeding information */}
+      {/* Modal */}
       {isModalOpen && (
-        <div className="modal-overlay fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center">
-          <div className="modal-content bg-white p-6 rounded shadow-md max-w-md w-full">
-            <h3 className="text-xl font-semibold mb-2">Feeding Info</h3>
-            <p>{modalContent}</p>
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" onClick={() => setIsModalOpen(false)}>
+          <div className="bg-white w-full max-w-md p-6 rounded-lg relative" onClick={(e) => e.stopPropagation()}>
             <button
-              onClick={closeModal}
-              className="mt-4 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition"
+              onClick={() => setIsModalOpen(false)}
+              className="absolute top-4 right-4 text-gray-500 hover:text-gray-700"
             >
-              Close
+              <X className="w-6 h-6" />
             </button>
+            <h2 className="text-2xl font-semibold text-purple-600 mb-4">{selectedFood ? selectedFood.food : ''}</h2>
+            <p className="text-gray-700">{modalContent}</p>
           </div>
         </div>
       )}

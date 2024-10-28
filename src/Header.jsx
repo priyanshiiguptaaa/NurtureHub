@@ -1,29 +1,76 @@
-/* eslint-disable no-unused-vars */
-// src/Header.jsx
 import React from "react";
-import { Link } from "react-router-dom"; // Import Link from react-router-dom
+import { Link } from "react-router-dom";
 
-const Header = () => (
-  <header className="container mx-auto px-4 py-4 flex justify-between items-center">
-    <div className="flex items-center space-x-4">
-      <button className="text-2xl focus:outline-none">☰</button> {/* Added focus outline for accessibility */}
-      <img src="/placeholder.svg" alt="Aashira Logo" className="h-10 w-auto" />
-    </div>
-    <nav className="hidden md:flex space-x-6 text-aashira-green">
-      <Link to="#community" className="hover:text-aashira-dark">Community</Link>
-      <Link to="#pregnancy" className="hover:text-aashira-dark">Pregnancy</Link>
-      <Link to="/" className="hover:text-aashira-dark">Baby</Link> {/* Linking to the main page */}
-      {/* <Link to="#products" className="hover:text-aashira-dark">Products</Link> */}
-    </nav>
-    <div className="flex items-center space-x-4">
-      <button className="text-aashira-green hover:underline focus:outline-none">Login</button>
-      <button className="bg-aashira-green text-white px-4 py-2 rounded hover:bg-aashira-dark transition-colors duration-200">Sign up</button>
-      <select className="bg-transparent border-none text-aashira-green focus:outline-none">
-        <option>EN</option>
-        {/* You can add more language options here */}
-      </select>
-    </div>
-  </header>
-);
+const Header = () => {
+  return (
+    <header className="fixed top-0 left-0 right-0 h-20 bg-white shadow-md z-50">
+      <nav className="h-full max-w-7xl mx-auto px-4 flex justify-between items-center">
+        {/* Navigation Links */}
+        <ul className="flex space-x-10">
+          <li>
+            <Link 
+              to="/" 
+              className="text-[#8B4513] hover:text-[#4A6741] transition-colors duration-300 text-lg"
+            >
+              Home
+            </Link>
+          </li>
+          <li>
+            <Link 
+              to="/community" 
+              className="text-[#8B4513] hover:text-[#4A6741] transition-colors duration-300 text-lg"
+            >
+              Community
+            </Link>
+          </li>
+          <li>
+            <Link 
+              to="/pregnancy" 
+              className="text-[#8B4513] hover:text-[#4A6741] transition-colors duration-300 text-lg"
+            >
+              Pregnancy
+            </Link>
+          </li>
+          <li>
+            <Link 
+              to="/baby" 
+              className="text-[#8B4513] hover:text-[#4A6741] transition-colors duration-300 text-lg"
+            >
+              Baby
+            </Link>
+          </li>
+        </ul>
+
+        {/* Auth Buttons */}
+        <div className="flex items-center space-x-4">
+          <Link to="/login">
+            <button 
+              className="px-6 py-2.5 rounded-full border-2 border-[#4A6741] text-[#4A6741] hover:bg-[#4A6741] hover:text-white transition-colors duration-300"
+              aria-label="Login"
+            >
+              Login
+            </button>
+          </Link>
+          <Link to="/signup">
+            <button 
+              className="px-6 py-2.5 rounded-full bg-[#4A6741] text-white hover:bg-[#5B573E] transition-colors duration-300"
+              aria-label="Sign Up"
+            >
+              Sign Up
+            </button>
+          </Link>
+          <div>
+            <button 
+              className="px-4 py-2 rounded-full bg-[#8B4513] text-white hover:bg-[#5B573E] transition-colors duration-300"
+              aria-label="Select Language"
+            >
+              EN
+            </button>
+          </div>
+        </div>
+      </nav>
+    </header>
+  );
+};
 
 export default Header;
