@@ -1,4 +1,3 @@
-
 # Nurture Hub
 
 Nurture Hub is a supportive online platform designed to provide pregnant women with access to peer support, expert advice, and tailored resources. This community-centered project aims to create a nurturing space where expecting mothers can find helpful information, share experiences, and receive personalized support.
@@ -13,6 +12,9 @@ Nurture Hub is a supportive online platform designed to provide pregnant women w
 ## 📽️ Demo
 Watch the project demo on [YouTube](https://youtu.be/rcdEfAfdUiY).
 
+## 🌐 Deployment
+Access the live application here: [Nurture Hub](https://nurture-hub.vercel.app/).
+
 ## 🚀 Getting Started
 
 ### Prerequisites
@@ -22,7 +24,7 @@ Watch the project demo on [YouTube](https://youtu.be/rcdEfAfdUiY).
 
 1. Clone the repository:
    ```bash
-   git clone (https://github.com/priyanshiiguptaaa/NurtureHub).git
+   git clone https://github.com/priyanshiiguptaaa/NurtureHub.git
    ```
 2. Navigate to the project folder:
    ```bash
