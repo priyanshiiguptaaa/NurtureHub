@@ -114,20 +114,7 @@ const Footer = () => {
           </div>
         </div>
 {/* 
-        {/* Mentor Acknowledgment Section */}
-        <div className="bg-white rounded-lg p-8 mb-6 shadow-md border border-gray-200">
-          <div className="text-center">
-            <h3 className="text-[#8B4513] font-serif font-bold mb-4 text-xl">Project Mentor</h3>
-            <div className="bg-gradient-to-r from-[#4A6741] to-[#8B4513] text-white py-3 px-6 rounded-lg inline-block mb-4">
-              <p className="text-lg font-semibold">Dr. Srinivas Reddy Bandaru</p>
-            </div>
-            <p className="text-gray-600 text-base max-w-2xl mx-auto leading-relaxed">
-              We extend our heartfelt gratitude for the invaluable mentorship and guidance 
-              in the successful completion of NurtureHub
-            </p>
-          </div>
-        </div>
- */}
+
         {/* Divider */}
         <div className="border-t border-gray-200 my-6"></div>
 
