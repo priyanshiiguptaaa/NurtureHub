@@ -113,7 +113,7 @@ const Footer = () => {
             </div>
           </div>
         </div>
-
+{/* 
         {/* Mentor Acknowledgment Section */}
         <div className="bg-white rounded-lg p-8 mb-6 shadow-md border border-gray-200">
           <div className="text-center">
@@ -127,7 +127,7 @@ const Footer = () => {
             </p>
           </div>
         </div>
-
+ */}
         {/* Divider */}
         <div className="border-t border-gray-200 my-6"></div>
 
