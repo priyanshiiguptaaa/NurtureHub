@@ -28,9 +28,15 @@ const Footer = () => {
               alt="Nurture Hub Logo" 
               className="h-16 w-auto mb-4 rounded-lg shadow-md"
             />
-            <p className="text-gray-600 text-sm text-center md:text-left">
-              Dr. Srinivas Reddy Bandaru - Mentor
+            <h3 className="text-[#8B4513] font-serif font-bold mb-4 text-xl">Project Mentor</h3>
+            <div className="bg-gradient-to-r from-[#4A6741] to-[#8B4513] text-white py-3 px-6 rounded-lg inline-block mb-4">
+              <p className="text-lg font-semibold">Dr. Srinivas Reddy Bandaru</p>
+            </div>
+            <p className="text-gray-600 text-base max-w-2xl mx-auto leading-relaxed">
+              We extend our heartfelt gratitude for the invaluable mentorship and guidance 
+              in the successful completion of NurtureHub
             </p>
+         
           </div>
 
           {/* Quick Links */}
@@ -105,6 +111,20 @@ const Footer = () => {
                 support@nurturehub.co
               </a>
             </div>
+          </div>
+        </div>
+
+        {/* Mentor Acknowledgment Section */}
+        <div className="bg-white rounded-lg p-8 mb-6 shadow-md border border-gray-200">
+          <div className="text-center">
+            <h3 className="text-[#8B4513] font-serif font-bold mb-4 text-xl">Project Mentor</h3>
+            <div className="bg-gradient-to-r from-[#4A6741] to-[#8B4513] text-white py-3 px-6 rounded-lg inline-block mb-4">
+              <p className="text-lg font-semibold">Dr. Srinivas Reddy Bandaru</p>
+            </div>
+            <p className="text-gray-600 text-base max-w-2xl mx-auto leading-relaxed">
+              We extend our heartfelt gratitude for the invaluable mentorship and guidance 
+              in the successful completion of NurtureHub
+            </p>
           </div>
         </div>
 
